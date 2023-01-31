@@ -29,11 +29,6 @@ class Store {
 
     addNotes(note) {
         const {title, text} = note;
-    
-        if (!title || !text) {
-            throw new Error('Title and Text cannot be empty');
-        }
-    
         const newNote = { title, text, id: uuidv1() };
         return this.getNotes()
             .then((notes) => [...notes, newNote])

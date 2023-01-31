@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const apiRoute = require('./routes/api');
-const indexRoute = require('./routes/html');
+const htmlRoute = require('./routes/html');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -9,6 +9,7 @@ const app = express();
 // Middleware for parsing JSON
 app.use(express.json());
 app.use('/api', apiRoute);
+app.use('/html', htmlRoute);
 app.use(express.static('public'));
 
 // Get Route for index.html
