@@ -1,6 +1,6 @@
 const util = require('util');
 const fs = require('fs');
-const uuid = require('uuid');
+const { v1: uuidv1 } = require('uuid');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
@@ -34,14 +34,14 @@ class Store {
             throw new Error('Title and Text cannot be empty');
         }
     
-        const newNote = { title, text, id: uuid() };
+        const newNote = { title, text, id: uuidv1() };
         return this.getNotes()
             .then((notes) => [...notes, newNote])
             .then((updateNotes) => this.write(updateNotes))
             .then(() => newNote);
     }
     
-    deleteNote(id) {
+    deleteNotes(id) {
         return this.getNotes()
             .then((notes) => notes.filter((note) => note.id !=id))
             .then((filteredNotes) => this.write(filteredNotes));
